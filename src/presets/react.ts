@@ -1,6 +1,7 @@
 import type { Linter } from "eslint";
 
 import eslintReact from "@eslint-react/eslint-plugin";
+import reactHooks from "eslint-plugin-react-hooks";
 
 import type { FilesOptions } from "./globals.js";
 
@@ -30,6 +31,7 @@ export function react({
   const typescriptConfig = eslintReact.configs[
     typescriptConfigName
   ] as Linter.Config;
+  const hooksConfig = reactHooks.configs.flat.recommended;
   const javascriptConfig: Linter.Config = {
     ...recommendedConfig,
     files,
@@ -41,13 +43,19 @@ export function react({
     },
     name: "wowlab/react/recommended",
   };
+  const javascriptHooksConfig: Linter.Config = {
+    ...hooksConfig,
+    files,
+    name: "wowlab/react/hooks",
+  };
 
   if (!typescript && !typeChecked) {
-    return [javascriptConfig];
+    return [javascriptConfig, javascriptHooksConfig];
   }
 
   return [
     javascriptConfig,
+    javascriptHooksConfig,
     ...typescriptPreset({
       files: typescriptFiles,
       tsconfigRootDir,
@@ -57,6 +65,11 @@ export function react({
       ...typescriptConfig,
       files: typescriptFiles,
       name: `wowlab/react/typescript/${typescriptConfigName}`,
+    },
+    {
+      ...hooksConfig,
+      files: typescriptFiles,
+      name: "wowlab/react/typescript/hooks",
     },
   ];
 }

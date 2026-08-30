@@ -1,6 +1,6 @@
 {
   "name": "@wowlab/eslint-config",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Composable ESLint flat configs for JavaScript and TypeScript",
   "license": "MIT",
   "type": "module",
@@ -63,6 +63,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "@tanstack/eslint-plugin-query": "^5.100.14",
     "eslint-plugin-perfectionist": "^5.9.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-sonarjs": "^4.0.3",
     "eslint-plugin-switch-case": "^4.0.0",
     "eslint-plugin-unicorn": "^64.0.0",

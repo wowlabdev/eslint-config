@@ -34,6 +34,32 @@ describe("React preset", () => {
     expect(ruleIds(outside)).not.toContain("@eslint-react/no-array-index-key");
   });
 
+  it("enables React Hooks rules", async () => {
+    const eslint = eslintFor({ presets: [presets.react()] });
+    const result = await lintFixture(eslint, "hook-dependency.jsx");
+
+    expect(ruleIds(result)).toContain("react-hooks/exhaustive-deps");
+  });
+
+  it("scopes React Hooks rules", async () => {
+    const eslint = eslintFor({
+      presets: [presets.react({ files: ["ui/**/*.jsx"] })],
+    });
+    const included = await lintFixture(
+      eslint,
+      "hook-dependency.jsx",
+      "ui/component.jsx",
+    );
+    const outside = await lintFixture(
+      eslint,
+      "hook-dependency.jsx",
+      "outside/component.jsx",
+    );
+
+    expect(ruleIds(included)).toContain("react-hooks/exhaustive-deps");
+    expect(ruleIds(outside)).not.toContain("react-hooks/exhaustive-deps");
+  });
+
   it("scopes TypeScript files", async () => {
     const eslint = eslintFor({
       presets: [
@@ -56,6 +82,19 @@ describe("React preset", () => {
 
     expect(included.fatalErrorCount).toBe(0);
     expect(wasConfigured(outside)).toBe(false);
+  });
+
+  it("enables React Hooks rules for TypeScript", async () => {
+    const eslint = eslintFor({
+      presets: [presets.react({ typescript: true })],
+    });
+    const result = await lintFixture(
+      eslint,
+      "hook-dependency.jsx",
+      "component.tsx",
+    );
+
+    expect(ruleIds(result)).toContain("react-hooks/exhaustive-deps");
   });
 
   it("runs type-aware rules", async () => {
