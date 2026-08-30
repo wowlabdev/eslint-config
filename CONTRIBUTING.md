@@ -1,6 +1,6 @@
 # Contributing
 
-Development requires Node.js 22.13 or newer, Deno 2, pnpm, and Markupwright.
+Development requires Node.js 22.13 or newer, Deno 2, and pnpm.
 
 ## Before you submit
 

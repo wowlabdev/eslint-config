@@ -48,9 +48,12 @@ describe("published package", () => {
     const packageJson = JSON.parse(
       await readFile(`${output}/package.json`, "utf8"),
     ) as Record<string, unknown>;
+    const sourcePackageJson = JSON.parse(
+      await readFile(resolve(import.meta.dirname, "../package.json"), "utf8"),
+    ) as Record<string, unknown>;
 
     expect(packageJson.name).toBe("@wowlab/eslint-config");
-    expect(packageJson.version).toBe("0.1.0");
+    expect(packageJson.version).toBe(sourcePackageJson.version);
     expect(packageJson.devDependencies).toBeUndefined();
     expect(packageJson.scripts).toBeUndefined();
   });
