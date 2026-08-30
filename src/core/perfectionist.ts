@@ -36,7 +36,14 @@ export function perfectionistConfig(internalPatterns: string[]): Linter.Config {
     rules: {
       curly: ["error", "all"],
       "perfectionist/sort-array-includes": "warn",
-      "perfectionist/sort-classes": ["warn", { groups: CLASS_GROUPS }],
+      "perfectionist/sort-classes": [
+        "warn",
+        {
+          groups: CLASS_GROUPS,
+          newlinesBetween: "ignore",
+          newlinesInside: "ignore",
+        },
+      ],
       "perfectionist/sort-decorators": "warn",
       "perfectionist/sort-enums": ["warn", { partitionByComment: true }],
       "perfectionist/sort-exports": "warn",
@@ -45,7 +52,13 @@ export function perfectionistConfig(internalPatterns: string[]): Linter.Config {
       "perfectionist/sort-interfaces": "warn",
       "perfectionist/sort-intersection-types": "warn",
       "perfectionist/sort-maps": ["warn", { partitionByComment: true }],
-      "perfectionist/sort-modules": "warn",
+      "perfectionist/sort-modules": [
+        "warn",
+        {
+          newlinesBetween: "ignore",
+          newlinesInside: "ignore",
+        },
+      ],
       "perfectionist/sort-named-exports": "warn",
       "perfectionist/sort-named-imports": "warn",
       "perfectionist/sort-objects": ["warn", { partitionByComment: true }],

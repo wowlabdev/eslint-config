@@ -43,7 +43,7 @@ export default createConfig({
 - `deno` adds Deno globals.
 - `next` adds the Next.js Core Web Vitals rules.
 - `node` adds Node.js globals.
-- `react` adds React rules for JavaScript. Set `typescript: true` to add TypeScript support or `typeChecked: true` to add TypeScript and type-aware rules together.
+- `react` adds React rules for JavaScript. Set `typescript: true` to add TypeScript support or `typeChecked: true` to add type-aware React and TypeScript rules. Set `typescriptTypeChecked: false` when only the React rules need type information.
 - `tanstackQuery` adds TanStack Query rules.
 - `typescript` adds TypeScript rules, optionally using the project service.
 

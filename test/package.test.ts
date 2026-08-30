@@ -27,6 +27,8 @@ describe("published package", () => {
     const modules = [
       "dist/core/base",
       "dist/core/perfectionist",
+      "dist/core/plugin",
+      "dist/core/rules/function-padding",
       "dist/core/stylistic",
       "dist/create-config",
       "dist/index",

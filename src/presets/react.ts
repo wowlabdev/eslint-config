@@ -15,6 +15,7 @@ export interface ReactOptions extends FilesOptions {
   typeChecked?: boolean;
   typescript?: boolean;
   typescriptFiles?: string[];
+  typescriptTypeChecked?: boolean;
 }
 
 export function react({
@@ -23,6 +24,7 @@ export function react({
   typeChecked = false,
   typescript = false,
   typescriptFiles = TYPESCRIPT_FILES,
+  typescriptTypeChecked = typeChecked,
 }: ReactOptions = {}): Linter.Config[] {
   const typescriptConfigName = typeChecked
     ? "recommended-type-checked"
@@ -59,8 +61,22 @@ export function react({
     ...typescriptPreset({
       files: typescriptFiles,
       tsconfigRootDir,
-      typeChecked,
+      typeChecked: typescriptTypeChecked,
     }),
+    ...(typeChecked && !typescriptTypeChecked
+      ? [
+          {
+            files: typescriptFiles,
+            languageOptions: {
+              parserOptions: {
+                projectService: true,
+                ...(tsconfigRootDir ? { tsconfigRootDir } : {}),
+              },
+            },
+            name: "wowlab/react/typescript/project-service",
+          },
+        ]
+      : []),
     {
       ...typescriptConfig,
       files: typescriptFiles,

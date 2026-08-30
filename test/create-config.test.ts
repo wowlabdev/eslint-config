@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
+import { presets } from "../src/index.js";
 import { eslintFor, lintFixture, ruleIds } from "./support/eslint.js";
+import { fixture } from "./support/fixtures.js";
 
 describe("createConfig", () => {
   it("uses consumer import patterns", async () => {
@@ -27,5 +29,35 @@ describe("createConfig", () => {
 
     await expect(eslint.isPathIgnored("dist/output.js")).resolves.toBe(true);
     await expect(eslint.isPathIgnored("src/index.js")).resolves.toBe(false);
+  });
+
+  it("separates function implementations without splitting overloads", async () => {
+    const options = {
+      presets: [presets.typescript()],
+      rules: { "perfectionist/sort-modules": "off" as const },
+    };
+    const result = await lintFixture(
+      eslintFor(options),
+      "function-spacing.ts.txt",
+      "function-spacing.ts",
+    );
+    const fixed = await lintFixture(
+      eslintFor(options, true),
+      "function-spacing.ts.txt",
+      "function-spacing.ts",
+    );
+    const messages = result.messages.filter(
+      ({ ruleId }) => ruleId === "wowlab/function-padding",
+    );
+    const layoutMessages = result.messages.filter(({ ruleId }) =>
+      [
+        "@stylistic/padding-line-between-statements",
+        "wowlab/function-padding",
+      ].includes(ruleId ?? ""),
+    );
+
+    expect(messages).toHaveLength(6);
+    expect(layoutMessages).toHaveLength(6);
+    expect(fixed.output).toBe(await fixture("function-spacing.fixed.txt"));
   });
 });

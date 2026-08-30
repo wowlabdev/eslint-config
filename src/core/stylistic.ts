@@ -72,7 +72,7 @@ const structuralRules: Linter.RulesRecord = {
     { blankLine: "always", next: "*", prev: ["if", "for", "while", "switch", "try", "function", "class"] },
     { blankLine: "always", next: "block-like", prev: "block-like" },
     { blankLine: "always", next: "export", prev: "*" },
-    { blankLine: "any", next: "function", prev: "function" },
+    { blankLine: "any", next: ["function", "function-overload"], prev: ["function", "function-overload"] },
     { blankLine: "any", next: "export", prev: "export" },
   ],
   "@stylistic/quotes": [

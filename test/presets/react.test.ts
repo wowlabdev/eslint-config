@@ -112,4 +112,27 @@ describe("React preset", () => {
       "@eslint-react/no-leaked-conditional-rendering",
     );
   });
+
+  it("can run type-aware React rules without type-aware TypeScript rules", async () => {
+    const root = fixturePath("");
+    const eslint = eslintFor({
+      presets: [
+        presets.react({
+          tsconfigRootDir: root,
+          typeChecked: true,
+          typescriptTypeChecked: false,
+        }),
+      ],
+    });
+    const config = await eslint.calculateConfigForFile(
+      fixturePath("leaked-render.tsx"),
+    );
+
+    expect(
+      config?.rules["@eslint-react/no-leaked-conditional-rendering"],
+    ).toBeDefined();
+    expect(
+      config?.rules["@typescript-eslint/no-floating-promises"],
+    ).toBeUndefined();
+  });
 });

@@ -1,0 +1,42 @@
+function overloaded(value: string): string;
+function overloaded(value: number): number;
+function overloaded(value: number | string): number | string {
+  return value;
+}
+
+function first(): void {}
+
+function second(): void {}
+
+if (true) {
+  function nestedFirst(): void {}
+
+  // Documents the second nested function.
+  function nestedSecond(): void {}
+}
+
+export function exportedFirst(): void {}
+
+export function exportedSecond(): void {}
+
+namespace Scope {
+  function namespaceFirst(): void {}
+
+  function namespaceSecond(): void {}
+}
+
+switch ("scope") {
+  case "scope": {
+    function caseFirst(): void {}
+
+    function caseSecond(): void {}
+  }
+}
+
+class Container {
+  static {
+    function staticFirst(): void {}
+
+    function staticSecond(): void {}
+  }
+}

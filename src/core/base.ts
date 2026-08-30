@@ -7,6 +7,7 @@ import switchCase from "eslint-plugin-switch-case";
 import unicorn from "eslint-plugin-unicorn";
 
 import { perfectionistConfig } from "./perfectionist.js";
+import { wowlabPlugin } from "./plugin.js";
 import { stylisticConfig } from "./stylistic.js";
 
 const ruleOverrides: Linter.RulesRecord = {
@@ -46,6 +47,11 @@ export function createBaseConfig({
       name: "wowlab/javascript",
     },
     perfectionistConfig(internalPatterns),
+    {
+      name: "wowlab/layout",
+      plugins: { wowlab: wowlabPlugin },
+      rules: { "wowlab/function-padding": "error" },
+    },
     stylisticConfig,
     {
       name: "wowlab/switch-case",
