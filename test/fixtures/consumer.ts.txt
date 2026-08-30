@@ -1,0 +1,9 @@
+import {
+  createConfig,
+  presets,
+  type ReactOptions,
+} from "@wowlab/eslint-config";
+
+const react: ReactOptions = { typescript: true };
+
+export default createConfig({ presets: [presets.react(react)] });

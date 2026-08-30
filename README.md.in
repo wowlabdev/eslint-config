@@ -1,0 +1,68 @@
+{% extends "readme-root.md.j2" %}
+{% block content %}
+## Getting started
+
+```console
+pnpm add --save-dev @wowlab/eslint-config eslint typescript
+```
+
+```js
+import { createConfig, presets } from "@wowlab/eslint-config";
+
+export default createConfig({
+  presets: [
+    presets.next(),
+    presets.react({
+      typeChecked: true,
+      tsconfigRootDir: import.meta.dirname,
+    }),
+    presets.tanstackQuery(),
+  ],
+  internalPatterns: ["^@/", "^@acme/"],
+  ignores: ["dist/**"],
+  rules: {
+    "unicorn/prefer-module": "off",
+  },
+  overrides: [
+    {
+      files: ["scripts/**"],
+      rules: { "no-console": "off" },
+    },
+  ],
+});
+```
+
+`createConfig` includes the base rules. Consumer rules and overrides are applied last.
+
+## Presets
+
+- `deno` adds Deno globals.
+- `next` adds the Next.js Core Web Vitals rules.
+- `node` adds Node.js globals.
+- `react` adds React rules for JavaScript. Set `typescript: true` to add TypeScript support or `typeChecked: true` to add TypeScript and type-aware rules together.
+- `tanstackQuery` adds TanStack Query rules.
+- `typescript` adds TypeScript rules, optionally using the project service.
+
+Presets return ordinary flat-config arrays and work alongside configs from other plugins.
+
+## Development
+
+Development requires Node.js 22.13 or newer, Deno 2, pnpm, and Markupwright.
+
+```console
+cargo install markupwright --locked
+corepack enable
+pnpm install
+pnpm check
+```
+
+Run `pnpm docs:generate` after changing a `.md.in` file or package metadata.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to get started and [SECURITY.md](SECURITY.md) for vulnerability reports.
+
+## License
+
+[MIT](LICENSE)
+{% endblock %}

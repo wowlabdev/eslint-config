@@ -1,0 +1,24 @@
+version = 1
+
+[workspace]
+name = "ESLint Config"
+description = "Composable ESLint flat configs for JavaScript and TypeScript"
+domain = "node"
+
+[render]
+templates = ".markupwright/templates"
+header = "header.md.j2"
+navigation = "README.md"
+source-suffix = ".in"
+
+[domains.node]
+manifests = ["package.json"]
+source-documentation = true
+
+[domains.github-workflows.github]
+include = [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+scope = "root"
+
+[[documents]]
+include = ["**/*.md.in"]
+template = "document.md.j2"
