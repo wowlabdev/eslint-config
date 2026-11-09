@@ -3,9 +3,9 @@ import { ESLint } from "eslint";
 import { type ConfigOptions, createConfig } from "../../src/index.js";
 import { fixture } from "./fixtures.js";
 
-export function eslintFor(options?: ConfigOptions, fix = false): ESLint {
+export function eslintFor(options?: ConfigOptions, shouldFix = false): ESLint {
   return new ESLint({
-    fix,
+    fix: shouldFix,
     overrideConfig: createConfig(options),
     overrideConfigFile: true,
   });

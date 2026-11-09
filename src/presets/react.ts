@@ -70,7 +70,7 @@ export function react({
             languageOptions: {
               parserOptions: {
                 projectService: true,
-                ...(tsconfigRootDir ? { tsconfigRootDir } : {}),
+                ...(tsconfigRootDir && { tsconfigRootDir }),
               },
             },
             name: "wowlab/react/typescript/project-service",

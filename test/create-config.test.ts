@@ -49,11 +49,10 @@ describe("createConfig", () => {
     const messages = result.messages.filter(
       ({ ruleId }) => ruleId === "wowlab/function-padding",
     );
-    const layoutMessages = result.messages.filter(({ ruleId }) =>
-      [
-        "@stylistic/padding-line-between-statements",
-        "wowlab/function-padding",
-      ].includes(ruleId ?? ""),
+    const layoutMessages = result.messages.filter(
+      ({ ruleId }) =>
+        ruleId === "@stylistic/padding-line-between-statements" ||
+        ruleId === "wowlab/function-padding",
     );
 
     expect(messages).toHaveLength(6);

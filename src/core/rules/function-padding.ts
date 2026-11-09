@@ -44,7 +44,7 @@ function functionDeclaration(statement: Statement): FunctionDeclaration | null {
   };
 }
 
-function sameOverloadGroup(
+function isSameOverloadGroup(
   current: FunctionDeclaration,
   previous: FunctionDeclaration,
 ): boolean {
@@ -99,7 +99,7 @@ export const functionPadding: Rule.RuleModule = {
         if (
           !currentFunction ||
           !previousFunction ||
-          sameOverloadGroup(currentFunction, previousFunction) ||
+          isSameOverloadGroup(currentFunction, previousFunction) ||
           startLine > previous.loc.end.line + 1
         ) {
           continue;

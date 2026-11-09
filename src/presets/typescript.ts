@@ -25,8 +25,8 @@ export function typescript({
       ? {
           ...config.languageOptions,
           parserOptions: {
-            ...(typeChecked ? { projectService: true } : {}),
-            ...(tsconfigRootDir ? { tsconfigRootDir } : {}),
+            ...(typeChecked && { projectService: true }),
+            ...(tsconfigRootDir && { tsconfigRootDir }),
           },
         }
       : undefined;
@@ -34,7 +34,7 @@ export function typescript({
     return {
       ...config,
       files,
-      ...(languageOptions ? { languageOptions } : {}),
+      ...(languageOptions && { languageOptions }),
       name: config.name?.replace("typescript-eslint/", "wowlab/typescript/"),
     };
   });
