@@ -22,7 +22,9 @@ describe("published package", () => {
       { encoding: "utf8", shell: process.platform === "win32" },
     );
     const [pack] = JSON.parse(stdout) as [{ files: { path: string }[] }];
-    const files = pack.files.map(({ path }) => path).sort();
+    const files = pack.files
+      .map(({ path }) => path)
+      .sort((a, b) => a.localeCompare(b));
 
     const modules = [
       "dist/core/base",
@@ -43,7 +45,7 @@ describe("published package", () => {
       "README.md",
       ...modules.flatMap((module) => [`${module}.d.ts`, `${module}.js`]),
       "package.json",
-    ].sort();
+    ].sort((a, b) => a.localeCompare(b));
 
     expect(files).toEqual(expectedFiles);
 

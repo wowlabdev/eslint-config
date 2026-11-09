@@ -64,7 +64,7 @@ export function createBaseConfig({
         ],
       },
     },
-    unicorn.configs["flat/recommended"],
+    unicorn.configs.recommended,
     sonarjs.configs.recommended,
     comments.recommended,
     { name: "wowlab/rule-defaults", rules: ruleOverrides },

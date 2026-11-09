@@ -7,7 +7,7 @@ Composable ESLint flat configs for JavaScript and TypeScript
 ## Getting started
 
 ```console
-pnpm add --save-dev @wowlab/eslint-config eslint typescript
+pnpm add --save-dev @wowlab/eslint-config eslint@10 typescript@6.0
 ```
 
 ```js
@@ -37,6 +37,11 @@ export default createConfig({
 ```
 
 `createConfig` includes the base rules. Consumer rules and overrides are applied last.
+
+Requires ESLint 10.4 or newer within version 10 and TypeScript 5.6 through 6.0.
+Runtime dependencies use exact versions so plugin updates are tested before release.
+Transitive dependencies can still update; commit your project's lockfile and generate
+it using the same pnpm release-age policy as CI.
 
 ## Presets
 
