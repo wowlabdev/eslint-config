@@ -10,6 +10,19 @@ import {
 import { fixturePath } from "../support/fixtures.js";
 
 describe("React preset", () => {
+  it.each(["component.jsx", "component.tsx"])(
+    "accepts React ref names in %s",
+    async (filePath) => {
+      const eslint = eslintFor({
+        presets: [presets.react({ typescript: true })],
+      });
+      const result = await lintFixture(eslint, "react-ref.jsx", filePath);
+
+      expect(result.messages).toEqual([]);
+      expect(result.errorCount).toBe(0);
+    },
+  );
+
   it("enables JavaScript without enabling TypeScript", async () => {
     const eslint = eslintFor({ presets: [presets.react()] });
     const jsx = await lintFixture(eslint, "react-list.jsx", "component.jsx");

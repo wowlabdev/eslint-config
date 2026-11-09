@@ -44,6 +44,13 @@ export function react({
       },
     },
     name: "wowlab/react/recommended",
+    rules: {
+      ...recommendedConfig.rules,
+      "unicorn/name-replacements": [
+        "error",
+        { allowList: { ref: true, Ref: true } },
+      ],
+    },
   };
   const javascriptHooksConfig: Linter.Config = {
     ...hooksConfig,
@@ -81,6 +88,13 @@ export function react({
       ...typescriptConfig,
       files: typescriptFiles,
       name: `wowlab/react/typescript/${typescriptConfigName}`,
+      rules: {
+        ...typescriptConfig.rules,
+        "unicorn/name-replacements": [
+          "error",
+          { allowList: { ref: true, Ref: true } },
+        ],
+      },
     },
     {
       ...hooksConfig,
